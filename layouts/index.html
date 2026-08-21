@@ -1,0 +1,290 @@
+{{ define "main" }}
+<!-- ======= Hero：终端 + 系统面板 ======= -->
+<section class="hero wrap">
+  <div class="hero-grid">
+    <div class="term rv">
+      <div class="term-head">
+        <div class="dots" aria-hidden="true"><i></i><i></i><i></i></div>
+        <span class="term-title">guest@chenmo: ~ — zsh — 80×24</span>
+      </div>
+      <div class="term-body" id="term-body">
+        <div id="term-out"></div>
+        <div class="t-line">
+          <span class="p">guest@chenmo&nbsp;~&nbsp;%</span>
+          <input id="term-input" autocomplete="off" spellcheck="false" aria-label="终端输入" disabled>
+        </div>
+      </div>
+    </div>
+
+    <aside class="sys rv" style="transition-delay:.12s">
+      <div class="portrait duo">
+        <img class="kb" src="https://picsum.photos/seed/neon-terminal-desk/720/460" alt="工作台">
+      </div>
+      <div class="sys-body">
+        <div class="sys-row"><span class="k">whoami</span><span class="v">z · 后端工程师</span></div>
+        <div class="sys-row"><span class="k">location</span><span class="v">杭州 · 30.27°N</span></div>
+        <div class="sys-row"><span class="k">editor</span><span class="v">Neovim + tmux</span></div>
+        <div class="sys-row"><span class="k">focus</span><span class="v g">分布式存储 / eBPF</span></div>
+        <div class="sys-row"><span class="k">status</span><span class="v g">● 开放技术交流</span></div>
+        <div class="socials">
+          <a href="#">GitHub</a><a href="#">掘金</a><a href="#">知乎</a><a href="#">RSS</a><a href="#">Email</a>
+        </div>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<!-- ======= 跑马灯 ======= -->
+<div class="ticker" aria-hidden="true">
+  <div class="tick-track">
+    <span>分布式系统<i>✦</i>RUST<i>✦</i>GO<i>✦</i>KUBERNETES<i>✦</i>EBPF<i>✦</i>POSTGRESQL<i>✦</i>可观测性<i>✦</i>NEOVIM<i>✦</i>RAFT<i>✦</i>性能调优<i>✦</i></span>
+    <span>分布式系统<i>✦</i>RUST<i>✦</i>GO<i>✦</i>KUBERNETES<i>✦</i>EBPF<i>✦</i>POSTGRESQL<i>✦</i>可观测性<i>✦</i>NEOVIM<i>✦</i>RAFT<i>✦</i>性能调优<i>✦</i></span>
+  </div>
+</div>
+
+<!-- ======= 文章：粘性双栏 ======= -->
+<section id="posts" class="wrap">
+  <div class="posts-layout">
+    <aside class="side">
+      <div class="panel rv">
+        <div class="me">
+          <img src="https://picsum.photos/seed/avatar-engineer-mo/120/120" alt="z头像">
+          <div><div class="nm">z</div><div class="rl">$ write --blog</div></div>
+        </div>
+        <div class="stats">
+          <div class="stat"><b>{{ len .Site.RegularPages }}</b><span>POSTS</span></div>
+          <div class="stat"><b>{{ len .Site.Taxonomies.categories }}</b><span>CATEGORIES</span></div>
+          <div class="stat"><b>32万</b><span>WORDS</span></div>
+          <div class="stat"><b>1024</b><span>DAYS</span></div>
+        </div>
+      </div>
+
+      <div class="panel rv">
+        <h4>TAG_CLOUD</h4>
+        <div class="tagcloud">
+          {{- range $name, $_ := .Site.Taxonomies.tags -}}
+          <a href="{{ "tags/" | relURL }}{{ $name | urlize }}">{{ $name }}</a>
+          {{- end -}}
+        </div>
+      </div>
+
+      <div class="panel rv">
+        <h4>RECENT_ACTIVITY</h4>
+        <div class="feed-list">
+          {{- range first 4 .Site.RegularPages.ByDate.Reverse -}}
+          <div class="feed-item"><span class="tp">post</span><span>{{ .Title }}</span></div>
+          {{- end -}}
+        </div>
+      </div>
+    </aside>
+
+    <div class="feed">
+      <div class="shead rv">
+        <span class="slash">//</span><span class="idx">01</span><span class="label">WRITINGS</span>
+        <h2 class="s-title" data-scramble>最新文章</h2>
+        <span class="s-line"></span>
+        <a class="s-link" href="{{ "posts/" | relURL }}">全部归档 ↗</a>
+      </div>
+
+      <!-- 置顶：最新文章 -->
+      {{- $latest := index (first 1 .Site.RegularPages.ByDate.Reverse) 0 -}}
+      {{- if $latest -}}
+      <article class="featured rv">
+        <a class="f-media duo" href="{{ $latest.RelPermalink }}">
+          {{- $img := $latest.Params.image | default "https://picsum.photos/seed/datacenter-night-observability/900/620" -}}
+          <img class="kb" src="{{ $img }}" alt="{{ $latest.Title }}">
+          <span class="f-badge">{{ if gt (len $latest.Content) 5000 }}深度长文{{ else }}精选{{ end }}</span>
+          <span class="f-coord">30.2741°N / 120.1552°E</span>
+        </a>
+        <div class="f-body">
+          <div class="f-meta"><span class="hl">{{ $latest.Date.Format "2006-01-02" }}</span> · {{ $latest.ReadingTime }} 分钟 · {{ $latest.WordCount }} 字</div>
+          <h3><a href="{{ $latest.RelPermalink }}">{{ $latest.Title }}</a></h3>
+          <p>{{ $latest.Description | default $latest.Summary }}</p>
+          <div class="f-foot">
+            <div class="chips">
+              {{- range $latest.Params.tags -}}
+              <span>#{{ . }}</span>
+              {{- end -}}
+            </div>
+            <a class="readmore" href="{{ $latest.RelPermalink }}">阅读全文 <span>→</span></a>
+          </div>
+        </div>
+      </article>
+      {{- end -}}
+
+      <!-- 筛选 -->
+      <div class="filter-bar rv">
+        <button class="fbtn on" data-f="all">全部</button>
+        {{- range $name, $_ := .Site.Taxonomies.categories -}}
+        <button class="fbtn" data-f="{{ $name | urlize }}">{{ $name }}</button>
+        {{- end -}}
+        <span class="fcount">ls posts/ → <b id="shown">{{ len .Site.RegularPages }}</b> / {{ len .Site.RegularPages }} 篇</span>
+      </div>
+
+      <div id="post-list" data-stagger>
+        {{- range .Site.RegularPages.ByDate.Reverse -}}
+        {{- $cat := index (.Params.categories | default (slice "未分类")) 0 -}}
+        <article class="post rv" data-cat="{{ $cat | urlize }}">
+          <div class="post-date">
+            <span class="d">{{ .Date.Format "02" }}</span>
+            <span class="m">{{ .Date.Format "Jan" | upper }}</span>
+            <span class="y">{{ .Date.Format "2006" }}</span>
+          </div>
+          <div>
+            <div class="post-meta">
+              <span class="cat">{{ $cat }}</span>
+              {{ .ReadingTime }} 分钟 · {{ .WordCount }} 字
+            </div>
+            <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+            <p>{{ .Description | default .Summary | plainify }}</p>
+            <div class="post-tags">
+              {{- range .Params.tags -}}
+              <span>#{{ . }}</span>
+              {{- end -}}
+            </div>
+          </div>
+          <div class="post-arrow">→</div>
+        </article>
+        {{- end -}}
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======= 开源项目 ======= -->
+<section id="projects" class="wrap">
+  <div class="shead rv">
+    <span class="slash">//</span><span class="idx">02</span><span class="label">OPEN_SOURCE</span>
+    <h2 class="s-title" data-scramble>开源项目</h2>
+    <span class="s-line"></span>
+    <a class="s-link" href="https://github.com/gitzhy07" target="_blank">github.com/gitzhy07 ↗</a>
+  </div>
+  <div class="repo-grid" data-stagger>
+    {{- range where .Site.RegularPages "Section" "projects" | default (slice) -}}
+    <a class="repo rv" href="{{ .RelPermalink }}">
+      <div class="r-top"><span class="r-name">{{ .Title }}</span><span class="r-vis">{{ .Params.visibility | default "Public" }}</span></div>
+      <p>{{ .Description | default .Summary | plainify }}</p>
+      <div class="r-meta">
+        <span class="lang" style="--c:{{ .Params.langColor | default "#888" }}">{{ .Params.lang | default "Text" }}</span>
+        <span>★ {{ .Params.stars | default 0 }}</span>
+        <span>⑂ {{ .Params.forks | default 0 }}</span>
+        <span class="r-upd">更新于 {{ .Lastmod.Format "2006-01-02" }}</span>
+      </div>
+    </a>
+    {{- else -}}
+    {{/* 静态占位项目 */}}
+    <a class="repo rv" href="#">
+      <div class="r-top"><span class="r-name">raft-kv</span><span class="r-vis">Public</span></div>
+      <p>教学级 Raft KV 存储：MIT 6.5846 全实验的逐行注释实现，含 ReadIndex、Lease Read 与快照压缩，配套 7 篇图文解析。</p>
+      <div class="r-meta"><span class="lang" style="--c:#dea584">Rust</span><span>★ 2,314</span><span>⑂ 287</span><span class="r-upd">更新于 3 天前</span></div>
+    </a>
+    <a class="repo rv" href="#">
+      <div class="r-top"><span class="r-name">ebpf-echo</span><span class="r-vis">Public</span></div>
+      <p>基于 eBPF 的零拷贝网络延迟观测器：挂到内核上就能看到每个 syscall 的真实耗时，单核轻松扛住 10Gbps。</p>
+      <div class="r-meta"><span class="lang" style="--c:#555">C</span><span>★ 862</span><span>⑂ 94</span><span class="r-upd">更新于昨天</span></div>
+    </a>
+    <a class="repo rv" href="#">
+      <div class="r-top"><span class="r-name">trace-sampler</span><span class="r-vis">Public</span></div>
+      <p>OpenTelemetry 尾部采样策略集：支持按错误码、延迟分桶与路由白名单组合采样，错误链路 100% 保留。</p>
+      <div class="r-meta"><span class="lang" style="--c:#00ADD8">Go</span><span>★ 418</span><span>⑂ 36</span><span class="r-upd">更新于 2 周前</span></div>
+    </a>
+    <a class="repo rv" href="#">
+      <div class="r-top"><span class="r-name">dotfiles</span><span class="r-vis">Public</span></div>
+      <p>打磨六年的 Neovim / tmux / zsh 配置，一键繁殖脚本。内含一份「为什么这么配」的长篇 README，欢迎抄作业。</p>
+      <div class="r-meta"><span class="lang" style="--c:#89e051">Shell</span><span>★ 1,102</span><span>⑂ 340</span><span class="r-upd">更新于上周</span></div>
+    </a>
+    {{- end -}}
+  </div>
+</section>
+
+<!-- ======= 片段 & 随记 ======= -->
+<section id="notes" class="wrap">
+  <div class="shead rv">
+    <span class="slash">//</span><span class="idx">03</span><span class="label">SNIPPETS</span>
+    <h2 class="s-title" data-scramble>碎片与灵感</h2>
+    <span class="s-line"></span>
+    <a class="s-link" href="#">更多片段 ↗</a>
+  </div>
+  <div class="notes-grid">
+    {{- $snippets := where .Site.RegularPages "Section" "notes" -}}
+    <div class="code-window rv">
+      <div class="code-head">
+        <span>snippet.go</span><span style="color:var(--line2)">|</span><span>Go · 18 行</span>
+        <button class="copy-btn" id="copy-btn">复制代码</button>
+      </div>
+      <div class="code-body">
+        <div class="cl"><span class="cm">// 指数退避 + 全抖动：比「重试 3 次」温柔得多</span></div>
+        <div class="cl"><span class="kw">func</span> <span class="fn">Retry</span>(ctx <span class="ty">context.Context</span>, fn <span class="kw">func</span>() <span class="ty">error</span>) <span class="ty">error</span> {</div>
+        <div class="cl">    delay := <span class="num">100</span> * <span class="ty">time</span>.Millisecond</div>
+        <div class="cl">    <span class="kw">for</span> i := <span class="num">0</span>; i &lt; <span class="num">6</span>; i++ {</div>
+        <div class="cl">        <span class="kw">if</span> err := <span class="fn">fn</span>(); err == <span class="kw">nil</span> {</div>
+        <div class="cl">            <span class="kw">return</span> <span class="kw">nil</span></div>
+        <div class="cl">        }</div>
+        <div class="cl">        jitter := <span class="ty">time</span>.<span class="fn">Duration</span>(rand.<span class="fn">Int63n</span>(<span class="ty">int64</span>(delay)))</div>
+        <div class="cl">        <span class="kw">select</span> {</div>
+        <div class="cl">        <span class="kw">case</span> &lt;-<span class="ty">time</span>.<span class="fn">After</span>(jitter):</div>
+        <div class="cl">        <span class="kw">case</span> &lt;-ctx.<span class="fn">Done</span>():</div>
+        <div class="cl">            <span class="kw">return</span> ctx.<span class="fn">Err</span>()</div>
+        <div class="cl">        }</div>
+        <div class="cl">        delay *= <span class="num">2</span></div>
+        <div class="cl">    }</div>
+        <div class="cl">    <span class="kw">return</span> <span class="ty">errors</span>.<span class="fn">New</span>(<span class="str">"重试次数耗尽"</span>)</div>
+        <div class="cl">    }</div>
+        <div class="cl">}</div>
+      </div>
+    </div>
+
+    <div class="note-cards" data-stagger>
+      {{- range first 3 (where .Site.RegularPages "Section" "notes" | default (slice)) -}}
+      <div class="note rv">
+        <div class="nd">NOTE · {{ .Date.Format "2006-01-02 15:04" }}</div>
+        <p>{{ .Content | plainify | truncate 120 }}</p>
+      </div>
+      {{- else -}}
+      <div class="note rv">
+        <div class="nd">NOTE · 2025-06-21 23:14</div>
+        <p>Go 1.23 的 <b>range over func</b> 真香，配合 iter 包写管道终于不用回调套回调了。周末整理一篇笔记。</p>
+      </div>
+      <div class="note rv">
+        <div class="nd">NOTE · 2025-06-09 21:02</div>
+        <p>把家里的 N100 小主机刷了 Proxmox，现在跑着 7 个容器 + 1 个 HomeLab 面板，整机功耗 <b>6W</b>，比路由器还安静。</p>
+      </div>
+      <div class="note rv">
+        <div class="nd">NOTE · 2025-05-30 10:47</div>
+        <p>面试被问「如何设计全局唯一 ID」，聊到 Snowflake 的时钟回拨时发现自己的答案有漏洞，回来重读了一遍 Twitter 原文，已补充到旧文里。</p>
+      </div>
+      {{- end -}}
+    </div>
+  </div>
+</section>
+
+<!-- ======= 订阅 & 友链 ======= -->
+<section id="connect" class="wrap">
+  <div class="shead rv">
+    <span class="slash">//</span><span class="idx">04</span><span class="label">CONNECT</span>
+    <h2 class="s-title" data-scramble>订阅与友链</h2>
+    <span class="s-line"></span>
+  </div>
+  <div class="connect-grid">
+    <div class="sub-term rv">
+      <div class="code-head"><span>subscribe.sh</span><span style="margin-left:auto;color:var(--acc)">bash</span></div>
+      <div class="sub-body">
+        <div class="line"><span class="hl">$</span> ./subscribe.sh --channel email</div>
+        <div class="line">每周三 21:00 推送新文章，只有正文，没有广告，随时退订。</div>
+        <form class="sub-form" id="sub-form" novalidate>
+          <input type="email" id="sub-email" placeholder="you@example.com" aria-label="邮箱地址">
+          <button type="submit">订阅 →</button>
+        </form>
+        <div class="sub-msg" id="sub-msg">// 等待输入…</div>
+      </div>
+    </div>
+    <div class="friends" data-stagger>
+      <a class="rv" href="#"><span class="fd"></span><span class="fn">阮一峰的网络日志</span><span class="fu">ruanyf.com</span></a>
+      <a class="rv" href="#"><span class="fd"></span><span class="fn">云风的博客</span><span class="fu">blog.codingnow.com</span></a>
+      <a class="rv" href="#"><span class="fd"></span><span class="fn">ByteByteGo</span><span class="fu">bytebytego.com</span></a>
+      <a class="rv" href="#"><span class="fd"></span><span class="fn">Tony Bai</span><span class="fu">tonybai.com</span></a>
+      <a class="rv" href="#"><span class="fd"></span><span class="fn">申请友链 →</span><span class="fu">via email</span></a>
+    </div>
+  </div>
+</section>
+{{ end }}

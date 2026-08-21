@@ -1,0 +1,30 @@
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="logo-f">z的终端 <span>_</span></div>
+        <p>一个没有推荐算法的角落。文章全部原创、代码可复现、评论区开放。本站由 Hugo 构建，部署在 GitHub Pages 上。</p>
+      </div>
+      <div>
+        <h5>SITEMAP</h5>
+        <ul><li><a href="#posts">文章归档</a></li><li><a href="{{ "tags/" | relURL }}">标签索引</a></li><li><a href="#projects">开源项目</a></li><li><a href="#">关于我</a></li></ul>
+      </div>
+      <div>
+        <h5>FEED</h5>
+        <ul><li><a href="{{ "index.xml" | relURL }}">RSS 2.0</a></li><li><a href="{{ "index.xml" | relURL }}">Atom</a></li><li><a href="#connect">邮件订阅</a></li></ul>
+      </div>
+      <div>
+        <h5>STATS</h5>
+        <ul class="mono" style="font-family:var(--mono);font-size:12.5px;color:var(--mut)">
+          <li>累计字数 320,481</li><li>今日 PV&nbsp;&nbsp;1,024</li><li>连续在线 1,024 天</li><li>宕机次数 0</li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span class="status"><i></i>所有系统运行正常</span>
+      <span>© {{ now.Year }} z</span>
+      <span>echo "Made with Hugo &amp; Neovim"</span>
+      <span class="exit">$ <b>exit</b></span>
+    </div>
+  </div>
+</footer>

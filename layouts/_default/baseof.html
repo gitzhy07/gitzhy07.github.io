@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{ if .IsHome }}z的终端{{ else }}{{ .Title }} · z的终端{{ end }}</title>
+<meta name="description" content="{{ if .Description }}{{ .Description }}{{ else }}一个没有推荐算法的角落。文章全部原创、代码可复现。{{ end }}">
+{{- with .Params.tags -}}
+<meta name="keywords" content="{{ delimit . ", " }}">
+{{- end -}}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@700;900&display=swap" rel="stylesheet">
+{{ $css := resources.Get "css/style.css" | resources.Copy "css/style.css" }}
+<style>{{ $css.Content | safeCSS }}</style>
+</head>
+<body>
+<div class="noise" aria-hidden="true"></div>
+<div class="progress" id="progress" aria-hidden="true"></div>
+
+{{- partial "topbar.html" . -}}
+
+<main>
+{{- block "main" . }}{{ end -}}
+</main>
+
+{{- partial "footer.html" . -}}
+
+<button class="top-btn" id="top-btn" aria-label="回到顶部">↑ top</button>
+
+{{ $js := resources.Get "js/main.js" | resources.Copy "js/main.js" }}
+<script>{{ $js.Content | safeJS }}</script>
+</body>
+</html>

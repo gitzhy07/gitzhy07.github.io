@@ -1,0 +1,21 @@
+{{ define "main" }}
+<section class="wrap" style="padding-top:44px">
+  <div class="shead rv">
+    <span class="slash">//</span><span class="idx">TAGS</span>
+    <span class="label">TAG_CLOUD</span>
+    <h2 class="s-title" data-scramble>标签索引</h2>
+    <span class="s-line"></span>
+  </div>
+
+  <div class="tagcloud" style="padding:20px 0;gap:10px;display:flex;flex-wrap:wrap">
+    {{- range .Data.Terms.Alphabetical -}}
+    {{- $count := .Count -}}
+    {{- $size := add 12 (mul $count 2) -}}
+    {{- if gt $size 28 }}{{ $size = 28 }}{{ end -}}
+    <a href="{{ .Page.RelPermalink }}" style="font-size:{{ $size }}px;font-family:var(--mono);color:var(--mut);padding:6px 14px;border:1px solid var(--line2);border-radius:4px;transition:all .2s" onmouseover="this.style.color='var(--acc)';this.style.borderColor='var(--acc)'" onmouseout="this.style.color='';this.style.borderColor=''">
+      {{ .Page.Title }} <sup style="color:var(--acc);font-size:0.65em">{{ $count }}</sup>
+    </a>
+    {{- end -}}
+  </div>
+</section>
+{{ end }}

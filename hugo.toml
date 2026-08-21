@@ -1,0 +1,33 @@
+baseURL = "https://zhy07.top"
+locale = "zh-CN"
+title = "z的终端"
+
+# 内容管理
+defaultContentLanguage = "zh"
+paginate = 10
+summaryLength = 140
+
+# 输出
+[outputs]
+  home = ["HTML"]
+  page = ["HTML"]
+  section = ["HTML", "RSS"]
+
+# 分类
+[taxonomies]
+  tag = "tags"
+  category = "categories"
+
+# 渲染
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
+# 服务器
+[server]
+  [[server.headers]]
+    for = "/**"
+    [server.headers.values]
+      X-Frame-Options = "DENY"
+      X-Content-Type-Options = "nosniff"

@@ -1,0 +1,45 @@
+{{ define "main" }}
+<section class="wrap" style="padding-top:44px">
+  <div class="shead rv">
+    <span class="slash">//</span><span class="idx">ARCHIVE</span>
+    <span class="label">{{ .Title }}</span>
+    <h2 class="s-title" data-scramble>{{ .Title }}</h2>
+    <span class="s-line"></span>
+    <a class="s-link" href="{{ "index.xml" | relURL }}">RSS ↗</a>
+  </div>
+
+  {{- if .Content -}}
+  <div class="list-description rv" style="margin-bottom:24px;color:var(--mut);font-size:14px">
+    {{ .Content }}
+  </div>
+  {{- end -}}
+
+  <div id="post-list" data-stagger>
+    {{- range .Pages.ByDate.Reverse -}}
+    <article class="post rv">
+      <div class="post-date">
+        <span class="d">{{ .Date.Format "02" }}</span>
+        <span class="m">{{ .Date.Format "Jan" | upper }}</span>
+        <span class="y">{{ .Date.Format "2006" }}</span>
+      </div>
+      <div>
+        <div class="post-meta">
+          {{- with .Params.categories -}}
+          <span class="cat">{{ index . 0 }}</span>
+          {{- end -}}
+          {{ .ReadingTime }} 分钟 · {{ .WordCount }} 字
+        </div>
+        <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+        <p>{{ .Description | default .Summary | plainify }}</p>
+        <div class="post-tags">
+          {{- range .Params.tags -}}
+          <span>#{{ . }}</span>
+          {{- end -}}
+        </div>
+      </div>
+      <div class="post-arrow">→</div>
+    </article>
+    {{- end -}}
+  </div>
+</section>
+{{ end }}
