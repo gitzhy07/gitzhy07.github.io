@@ -4,7 +4,8 @@ title = "z的终端"
 
 # 内容管理
 defaultContentLanguage = "zh"
-paginate = 10
+[pagination]
+  pagerSize = 10
 summaryLength = 140
 
 # 输出
