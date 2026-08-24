@@ -43,11 +43,13 @@ button,input{font-family:var(--mono);font-size:13px}
 
 /* ---- 顶栏 ---- */
 .topbar{position:sticky;top:0;z-index:100;display:flex;align-items:center;gap:20px;
-  height:52px;padding:0 22px;background:rgba(10,14,19,.88);backdrop-filter:blur(8px);
-  border-bottom:1px solid var(--line);font-family:var(--mono);font-size:12.5px}
-.path{color:var(--mut)} .path b{color:var(--acc);font-weight:500}
-.nav{display:flex;gap:26px;margin-left:auto}
-.nav a{color:var(--mut);letter-spacing:.05em;position:relative;padding:4px 0;transition:color .2s}
+  height:76px;padding:0 36px;background:rgba(10,14,19,.88);backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--line);font-family:var(--mono);font-size:16px}
+.path{display:inline-flex;align-items:center;gap:12px;color:var(--mut)}
+.brand-icon{width:40px;height:40px;object-fit:cover;border-radius:6px;flex-shrink:0}
+.path b{color:var(--acc);font-weight:500}
+.nav{display:flex;gap:38px;margin-left:auto}
+.nav a{color:var(--mut);letter-spacing:.05em;position:relative;padding:8px 0;transition:color .2s}
 .nav a::after{content:'';position:absolute;left:0;bottom:0;height:1px;width:0;background:var(--acc);transition:width .25s}
 .nav a:hover{color:var(--txt)} .nav a:hover::after{width:100%}
 .tright{display:flex;align-items:center;gap:16px;color:var(--mut)}

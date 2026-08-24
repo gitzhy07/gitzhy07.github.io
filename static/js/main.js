@@ -52,7 +52,7 @@ $$('.rv, [data-scramble]').forEach(el => io.observe(el));
 const out  = $('#term-out'), body = $('#term-body'), input = $('#term-input');
 const PROMPT = 'PS C:\\Users\\guest\\blog> ';
 const SCRIPT = [
-  {cmd:'whoami', out:['<b>z</b> · 后端工程师 / 分布式存储方向','写代码，也写关于代码的代码。']},
+  {cmd:'whoami', out:['<b>zhy</b> · 后端工程师 / 分布式存储方向','写代码，也写关于代码的代码。']},
   {cmd:'cat ./now.txt', out:['正在攻坚 ▸ 用 <span class="hl">eBPF</span> 重写服务网格数据面','正在阅读 ▸ 《数据密集型应用系统设计》第 8 章']},
   {cmd:'uptime', out:['blog online <span class="am">1,024</span> days · 42 posts · load average: 0.42, 0.38, 0.36']}
 ];

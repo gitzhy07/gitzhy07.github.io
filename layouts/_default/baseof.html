@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>{{ if .IsHome }}z的终端{{ else }}{{ .Title }} · z的终端{{ end }}</title>
+<title>{{ if .IsHome }}zhy's blog{{ else }}{{ .Title }} · zhy's blog{{ end }}</title>
 <meta name="description" content="{{ if .Description }}{{ .Description }}{{ else }}一个没有推荐算法的角落。文章全部原创、代码可复现。{{ end }}">
 {{- with .Params.tags -}}
 <meta name="keywords" content="{{ delimit . ", " }}">
