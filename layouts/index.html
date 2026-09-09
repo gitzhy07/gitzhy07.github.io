@@ -88,17 +88,20 @@
       <!-- 置顶：最新文章 -->
       {{- $latest := index (first 1 .Site.RegularPages.ByDate.Reverse) 0 -}}
       {{- if $latest -}}
-      <article class="featured rv">
+      <article class="featured rv{{ if not $latest.Params.image }} no-image{{ end }}">
+        {{- with $latest.Params.image -}}
         <a class="f-media duo" href="{{ $latest.RelPermalink }}">
-          {{- $img := $latest.Params.image | default "https://picsum.photos/seed/datacenter-night-observability/900/620" -}}
-          <img class="kb" src="{{ $img }}" alt="{{ $latest.Title }}">
+          <img class="kb" src="{{ . }}" alt="{{ $latest.Title }}">
           <span class="f-badge">{{ if gt (len $latest.Content) 5000 }}深度长文{{ else }}精选{{ end }}</span>
           <span class="f-coord">30.2741°N / 120.1552°E</span>
         </a>
+        {{- end -}}
         <div class="f-body">
           <div class="f-meta"><span class="hl">{{ $latest.Date.Format "2006-01-02" }}</span> · {{ $latest.ReadingTime }} 分钟 · {{ $latest.WordCount }} 字</div>
           <h3><a href="{{ $latest.RelPermalink }}">{{ $latest.Title }}</a></h3>
-          <p>{{ $latest.Description | default $latest.Summary }}</p>
+          {{- $summary := .Description | default .Summary | plainify -}}
+          {{- $sentences := findRE "^[\\s\\S]*?[。！？!?](?:[\\s\\S]*?[。！？!?])?" $summary 1 -}}
+          <p>{{ if $sentences }}{{ index $sentences 0 }}{{ else }}{{ $summary | truncate 120 }}{{ end }}</p>
           <div class="f-foot">
             <div class="chips">
               {{- range $latest.Params.tags -}}
@@ -135,7 +138,9 @@
               {{ .ReadingTime }} 分钟 · {{ .WordCount }} 字
             </div>
             <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
-            <p>{{ .Description | default .Summary | plainify }}</p>
+            {{- $summary := .Description | default .Summary | plainify -}}
+            {{- $sentences := findRE "^[\\s\\S]*?[。！？!?](?:[\\s\\S]*?[。！？!?])?" $summary 1 -}}
+            <p>{{ if $sentences }}{{ index $sentences 0 }}{{ else }}{{ $summary | truncate 120 }}{{ end }}</p>
             <div class="post-tags">
               {{- range .Params.tags -}}
               <span>#{{ . }}</span>
