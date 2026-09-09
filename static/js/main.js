@@ -52,9 +52,9 @@ $$('.rv, [data-scramble]').forEach(el => io.observe(el));
 const out  = $('#term-out'), body = $('#term-body'), input = $('#term-input');
 const PROMPT = 'C:\\Users\\guest\\blog> ';
 const SCRIPT = [
-  {cmd:'whoami', out:['<b>zhy</b> · agent初学者 / 分布式存储方向','写代码，也写关于代码的代码。']},
-  {cmd:'cat ./now.txt', out:['正在攻坚 ▸ 用RAG提升AI能力']},
-  {cmd:'uptime', out:['blog online <span class="am">0</span> days · 42 posts · load average: 0.42, 0.38, 0.36']}
+  {cmd:'whoami', out:['<b>zhy</b> · agent初学者 / AI Agent 方向','写代码，也写关于代码的代码。']},
+  {cmd:'cat ./now.txt', out:['正在研究 ▸ <span class="hl">Transformer</span> 与 <span class="hl">RAG</span>','正在构建 ▸ 可调用工具的 AI Agent']},
+  {cmd:'uptime', out:['blog online <span class="am">0</span> days · focus: RAG · status: online']}
 ];
 function line(html, cls){
   const d = document.createElement('div');
