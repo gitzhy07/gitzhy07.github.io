@@ -116,7 +116,7 @@ section{padding:84px 0}
 .panel{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:20px}
 .panel h4{font-family:var(--mono);font-size:11px;letter-spacing:.22em;color:var(--dim);margin-bottom:14px;font-weight:500}
 .me{display:flex;gap:12px;align-items:center;margin-bottom:16px}
-.me img{width:52px;height:52px;border-radius:4px;filter:grayscale(1)}
+.me img{width:52px;height:52px;border-radius:4px}
 .me .nm{font-family:var(--serif);font-weight:900;font-size:18px}
 .me .rl{font-family:var(--mono);font-size:11.5px;color:var(--acc)}
 .stats{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:4px;overflow:hidden}
