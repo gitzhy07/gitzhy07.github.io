@@ -26,9 +26,12 @@ summaryLength = 140
     [markup.goldmark.renderer]
       unsafe = true
 
+[params]
+# 友链字段：name、url、description、category（可选）
+friendLinks = []
+
 # 服务器
 [server]
-  [[server.headers]]
     for = "/**"
     [server.headers.values]
       X-Frame-Options = "DENY"

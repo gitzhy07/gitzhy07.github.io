@@ -166,4 +166,36 @@
   <div class="repo-grid" data-stagger></div>
 </section>
 
+<!-- ======= 推荐与友链 ======= -->
+<section id="friends" class="wrap">
+  <div class="shead rv">
+    <span class="slash">//</span><span class="idx">03</span><span class="label">RECOMMENDATIONS_AND_LINKS</span>
+    <h2 class="s-title" data-scramble>推荐与友链</h2>
+    <span class="s-line"></span>
+  </div>
+
+  {{- with .Site.Params.friendLinks -}}
+  <div class="friend-grid" data-stagger>
+    {{- range . -}}
+    <a class="friend-card" href="{{ .url }}" target="_blank" rel="noopener noreferrer">
+      <div class="friend-top">
+        <h3>{{ .name }}</h3>
+        {{- with .category }}<span class="friend-category">{{ . }}</span>{{ end -}}
+      </div>
+      <p>{{ .description }}</p>
+      <span class="friend-link">访问站点 <span>↗</span></span>
+    </a>
+    {{- end -}}
+  </div>
+  {{- else -}}
+  <div class="friend-empty rv">
+    <span class="friend-empty-mark">[ ]</span>
+    <div>
+      <strong>友链整理中</strong>
+      <p>这里会放一些值得收藏的站点与创作者。</p>
+    </div>
+  </div>
+  {{- end -}}
+</section>
+
 {{ end }}
