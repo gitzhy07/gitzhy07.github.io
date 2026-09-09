@@ -1,6 +1,7 @@
 baseURL = "https://zhy07.top"
 locale = "zh-CN"
 title = "zhy's blog"
+hasCJKLanguage = true
 
 # 内容管理
 defaultContentLanguage = "zh"
