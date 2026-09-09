@@ -1,3 +1,9 @@
+{{- $totalWords := 0 -}}
+{{- range .Site.RegularPages -}}
+  {{- $totalWords = add $totalWords .WordCount -}}
+{{- end -}}
+{{- $startDate := time "2026-09-09" -}}
+{{- $days := div (sub now.Unix $startDate.Unix) 86400 -}}
 <footer>
   <div class="wrap">
     <div class="foot-grid">
@@ -11,18 +17,18 @@
       </div>
       <div>
         <h5>FEED</h5>
-        <ul><li><a href="{{ "index.xml" | relURL }}">RSS 2.0</a></li><li><a href="{{ "index.xml" | relURL }}">Atom</a></li><li><a href="#connect">邮件订阅</a></li></ul>
+        <ul><li><a href="{{ "index.xml" | relURL }}">RSS 2.0</a></li><li><a href="{{ "index.xml" | relURL }}">Atom</a></li></ul>
       </div>
       <div>
         <h5>STATS</h5>
         <ul class="mono" style="font-family:var(--mono);font-size:12.5px;color:var(--mut)">
-          <li>累计字数 320,481</li><li>今日 PV&nbsp;&nbsp;1,024</li><li>连续在线 1,024 天</li><li>宕机次数 0</li>
+          <li>累计字数 {{ $totalWords }}</li><li>今日 PV&nbsp;&nbsp;1,024</li><li>连续在线 {{ $days }} 天</li><li>宕机次数 0</li>
         </ul>
       </div>
     </div>
     <div class="foot-bottom">
       <span class="status"><i></i>所有系统运行正常</span>
-      <span>© {{ now.Year }} z</span>
+      <span>© {{ now.Year }} zhy</span>
       <span>echo "Made with Hugo &amp; Neovim"</span>
       <span class="exit">$ <b>exit</b></span>
     </div>

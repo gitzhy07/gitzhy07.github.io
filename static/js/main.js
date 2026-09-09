@@ -52,9 +52,9 @@ $$('.rv, [data-scramble]').forEach(el => io.observe(el));
 const out  = $('#term-out'), body = $('#term-body'), input = $('#term-input');
 const PROMPT = 'PS C:\\Users\\guest\\blog> ';
 const SCRIPT = [
-  {cmd:'whoami', out:['<b>zhy</b> · 后端工程师 / 分布式存储方向','写代码，也写关于代码的代码。']},
+  {cmd:'whoami', out:['<b>zhy</b> · agent初学者 / 分布式存储方向','写代码，也写关于代码的代码。']},
   {cmd:'cat ./now.txt', out:['正在攻坚 ▸ 用 <span class="hl">eBPF</span> 重写服务网格数据面','正在阅读 ▸ 《数据密集型应用系统设计》第 8 章']},
-  {cmd:'uptime', out:['blog online <span class="am">1,024</span> days · 42 posts · load average: 0.42, 0.38, 0.36']}
+  {cmd:'uptime', out:['blog online <span class="am">0</span> days · 42 posts · load average: 0.42, 0.38, 0.36']}
 ];
 function line(html, cls){
   const d = document.createElement('div');
@@ -103,7 +103,7 @@ const CMDS = {
     '&nbsp;&nbsp;<span class="hl">theme</span>&nbsp;&nbsp;&nbsp;&nbsp;切换荧光绿 / 琥珀主题',
     '&nbsp;&nbsp;<span class="hl">date</span>&nbsp;&nbsp;&nbsp;&nbsp;当前时间',
     '&nbsp;&nbsp;<span class="hl">clear</span>&nbsp;&nbsp;&nbsp;清屏'],
-  about: () => ['<b>z</b> · 杭州 · 后端工程师','关注：分布式存储 / 可观测性 / Rust','信条：先测量，再优化；先跑通，再抽象。'],
+  about: () => ['<b>zhy</b> · agent初学者','关注：分布式存储 / 可观测性 / Rust','信条：先测量，再优化；先跑通，再抽象。'],
   posts: () => { $('#posts').scrollIntoView({behavior: RM ? 'auto':'smooth'}); return ['已为你定位到 <span class="hl">最新文章 ↓</span>']; },
   projects: () => { $('#projects').scrollIntoView({behavior: RM ? 'auto':'smooth'}); return ['已为你定位到 <span class="hl">开源项目 ↓</span>']; },
   theme: toggleTheme,
@@ -152,26 +152,4 @@ $$('.fbtn').forEach(btn => btn.addEventListener('click', () => {
 }));
 
 /* ---------- 复制代码 ---------- */
-const copyBtn = $('#copy-btn');
-copyBtn.addEventListener('click', () => {
-  const code = Array.from(document.querySelectorAll('.cl')).map(l => l.innerText).join('\n');
-  const done = () => { copyBtn.textContent = '已复制 ✓'; copyBtn.classList.add('ok');
-    setTimeout(() => { copyBtn.textContent = '复制代码'; copyBtn.classList.remove('ok'); }, 1600); };
-  if (navigator.clipboard) navigator.clipboard.writeText(code).then(done);
-  else { const ta = document.createElement('textarea'); ta.value = code; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove(); done(); }
-});
-
-/* ---------- 订阅表单 ---------- */
-const subForm = $('#sub-form'), subEmail = $('#sub-email'), subMsg = $('#sub-msg');
-subForm.addEventListener('submit', e => {
-  e.preventDefault();
-  const v = subEmail.value.trim();
-  if (/^\S+@\S+\.\S+$/.test(v)) {
-    subMsg.textContent = '✔ 订阅成功 · 确认邮件已发往 ' + v;
-    subMsg.className = 'sub-msg ok'; subEmail.value = '';
-  } else {
-    subMsg.textContent = '✘ 邮箱格式看起来不太对，再试试？';
-    subMsg.className = 'sub-msg err';
-  }
-});
 })();
