@@ -175,17 +175,36 @@
   </div>
 
   {{- with .Site.Params.friendLinks -}}
-  <div class="friend-grid" data-stagger>
-    {{- range . -}}
-    <a class="friend-card" href="{{ .url }}" target="_blank" rel="noopener noreferrer">
-      <div class="friend-top">
-        <h3>{{ .name }}</h3>
-        {{- with .category }}<span class="friend-category">{{ . }}</span>{{ end -}}
-      </div>
-      <p>{{ .description }}</p>
-      <span class="friend-link">访问站点 <span>↗</span></span>
-    </a>
-    {{- end -}}
+  <div class="friend-split" data-stagger>
+    <div class="friend-column">
+      <h4 class="friend-col-title">推荐</h4>
+      {{- range where . "category" "推荐" -}}
+      <a class="friend-card" href="{{ .url }}" target="_blank" rel="noopener noreferrer">
+        <div class="friend-top">
+          <h3>{{ .name }}</h3>
+          <span class="friend-category">推荐</span>
+        </div>
+        <p>{{ .description }}</p>
+        <span class="friend-link">访问站点 <span>↗</span></span>
+      </a>
+      {{- else -}}
+      <div class="friend-empty-sub">暂无</div>
+      {{- end -}}
+    </div>
+    <div class="friend-column">
+      <h4 class="friend-col-title">友链</h4>
+      {{- range where . "category" "ne" "推荐" -}}
+      <a class="friend-card" href="{{ .url }}" target="_blank" rel="noopener noreferrer">
+        <div class="friend-top">
+          <h3>{{ .name }}</h3>
+        </div>
+        <p>{{ .description }}</p>
+        <span class="friend-link">访问站点 <span>↗</span></span>
+      </a>
+      {{- else -}}
+      <div class="friend-empty-sub">暂无</div>
+      {{- end -}}
+    </div>
   </div>
   {{- else -}}
   <div class="friend-empty rv">

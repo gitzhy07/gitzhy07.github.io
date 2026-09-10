@@ -206,7 +206,10 @@ section{padding:84px 0}
 .r-upd{margin-left:auto}
 
 /* ---- 推荐与友链 ---- */
-.friend-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.friend-split{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.friend-column{display:flex;flex-direction:column;gap:14px}
+.friend-col-title{font-family:var(--mono);font-size:12px;letter-spacing:.22em;color:var(--acc);
+  border-bottom:1px solid var(--line);padding-bottom:10px;margin-bottom:4px;font-weight:500}
 .friend-card{position:relative;background:var(--panel);border:1px solid var(--line);border-radius:6px;
   padding:22px 24px;display:flex;flex-direction:column;gap:12px;min-height:178px;
   transition:transform .25s,border-color .25s,background .25s}
@@ -227,6 +230,8 @@ section{padding:84px 0}
 .friend-empty-mark{font-family:var(--mono);font-size:22px;color:var(--acc)}
 .friend-empty strong{display:block;color:var(--txt);font-family:var(--serif);font-size:18px;margin-bottom:3px}
 .friend-empty p{font-size:13px}
+.friend-empty-sub{font-family:var(--mono);font-size:12px;color:var(--dim);padding:16px;text-align:center;
+  background:var(--bg2);border:1px dashed var(--line2);border-radius:6px}
 
 /* ---- 页脚 ---- */
 footer{border-top:1px solid var(--line);background:var(--bg2);position:relative;z-index:1}
@@ -259,7 +264,7 @@ footer{border-top:1px solid var(--line);background:var(--bg2);position:relative;
 
 /* ---- 响应式 ---- */
 @media (max-width:960px){
-  .hero-grid,.posts-layout,.repo-grid,.friend-grid{grid-template-columns:1fr}
+  .hero-grid,.posts-layout,.repo-grid,.friend-grid,.friend-split{grid-template-columns:1fr!important}
   .side{position:static;flex-direction:row;flex-wrap:wrap}
   .side .panel{flex:1;min-width:250px}
   .featured{grid-template-columns:1fr}

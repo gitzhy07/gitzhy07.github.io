@@ -28,7 +28,10 @@ summaryLength = 140
 
 [params]
 # 友链字段：name、url、description、category（可选）
-friendLinks = []
+friendLinks = [
+  {name = "lzh的快乐小窝", url = "https://cnblogs.com/linzhuohang", description = ""},
+  {name = "HelloGitHub", url = "https://hellogithub.com", description = "分享 GitHub 上有趣、入门级的开源项目", category = "推荐"}
+]
 
 # 服务器
 [server]
