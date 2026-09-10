@@ -219,7 +219,7 @@ section{padding:84px 0}
 .friend-card::after{bottom:-1px;right:-1px;border-left:0;border-top:0}
 .friend-card:hover::before,.friend-card:hover::after{opacity:1}
 .friend-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
-.friend-card h3{font-family:var(--mono);font-size:16px;color:var(--acc);font-weight:700}
+.friend-card h3{font-family:var(--serif);font-size:16px;color:var(--acc);font-weight:700}
 .friend-category{font-family:var(--mono);font-size:10.5px;color:var(--dim);border:1px solid var(--line2);
   border-radius:10px;padding:1px 9px;white-space:nowrap}
 .friend-card p{color:var(--mut);font-size:13px;line-height:1.75;flex:1}
