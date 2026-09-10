@@ -3,6 +3,8 @@ title: "对 OpenAI 宣布解决 NS 问题的思考"
 date: 2026-09-09
 draft: false
 image: "/images/openai_ns_title.png"
+categories:["杂谈"]
+tags: ["AI", "数学", "未来"]
 ---
 
 9 月 8 日，OpenAI 公布了一篇长达 165 页的数学论文，宣布找到了纳维–斯托克斯方程（Navier–Stokes，简称 NS）存在性与光滑性问题的解答。
