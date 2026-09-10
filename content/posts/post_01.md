@@ -3,7 +3,7 @@ title: "对 OpenAI 宣布解决 NS 问题的思考"
 date: 2026-09-09
 draft: false
 image: "/images/openai_ns_title.png"
-categories:["杂谈"]
+categories: ["杂谈"]
 tags: ["AI", "数学", "未来"]
 ---
 
